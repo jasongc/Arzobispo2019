@@ -74,7 +74,7 @@ namespace SigesoftWebAPI.Controllers.Consultorio
         public IHttpActionResult LiberarPaciente(MultiDataModel data)
         {
             MessageCustom _MessageCustom = new MessageCustom();
-            var result = new ConsultorioBL().LiberarPaciente(data.Int1, data.String1, data.String2);
+            var result = new ConsultorioBL().LiberarPaciente(data.Int1, data.String1, data.String2, data.String3);
             if (result)
             {
                 _MessageCustom.Error = false;

@@ -67,6 +67,7 @@
     <Compile Include="ConfigDx\ConfigDxBl.cs" />
     <Compile Include="Consultorio\ConsultorioBL.cs" />
     <Compile Include="Consultorio\PrintAdditionalExam.cs" />
+    <Compile Include="Embarazo\EmbarazoBL.cs" />
     <Compile Include="PlanIntegral\PlanIntegralBL.cs" />
     <Compile Include="RUC\RucDataBL.cs" />
     <Compile Include="z-ClientesSAMBHS\ClientesBL.cs" />

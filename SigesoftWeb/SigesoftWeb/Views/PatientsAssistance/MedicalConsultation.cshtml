@@ -1294,8 +1294,139 @@
         }
     }
 
+    const ValidacionSaveEmbarazo = function (arrId) {
+        let error = false;
+        for (var i = 0; i < arrId.length; i++) {
+            let input = $(arrId[i]);
+            if (input.val() == "") {
+                input.removeClass("border-success").addClass("border-danger");
+                error = true;
+            } else {
+                input.addClass("border-success").removeClass("border-danger");
+            }
+        }
+        if (error) {
+            alertafixed({
+                type: 'warning',
+                class: 'warning-class',
+                title: 'VALIDACIÓN',
+                message: 'Complete los campos para continuar porfavor.'
+            })
+            
+        }
+
+        return error;
+    }
+
+    function obtenerValorParametro(sParametroNombre) {
+        var sPaginaURL = window.location.search.substring(1);
+        var sURLVariables = sPaginaURL.split('&');
+        for (var i = 0; i < sURLVariables.length; i++) {
+            var sParametro = sURLVariables[i].split('=');
+            if (sParametro[0] == sParametroNombre) {
+                return sParametro[1];
+            }
+        }
+        return null;
+    }
+
     $(document).ready(function () {
 
+        $("#nuevo-plan-integral").on("click", function () {
+            //sessionStorage.setItem("TipoProb");
+            $("#modalProblemaPlan").modal("show");
+        })
+
+        $("#nuevo-problema-cronico").on("click", function () {
+
+            $("#modalProblemaPlan").modal("show");
+        })
+
+        $("#nuevo-problema-agudo").on("click", function () {
+
+            $("#modalProblemaPlan").modal("show");
+        })
+
+        $("#guardar-embarazo").on("click", function () {
+
+            let arrIds = ["#embarazo-anio", "#embarazo-cpn", "#embarazo-complicacion", "#embarazo-parto", "#embarazo-peso", "#embarazo-puerperio"]
+
+            if (!ValidacionSaveEmbarazo(arrIds)) {
+
+                let data = {
+                    PersonId : obtenerValorParametro("id"),
+                    Anio : $("#embarazo-anio").val(),
+                    Cpn : $("#embarazo-cpn").val(),
+                    Complicacion : $("#embarazo-complicacion").val(),
+                    Parto : $("#embarazo-parto").val(),
+                    PesoRn : $("#embarazo-peso").val(),
+                    Puerpio : $("#embarazo-puerperio").val(),
+                }
+
+                $("#modalNuevoEmabarazo").find(".modal-header").addClass("loadingGrid");
+                $.ajax({
+                    cache: false,
+                    method: 'POST',
+                    dataType: 'json',
+                    data,
+                    url: '/PatientsAssistance/AddEmbarazo',
+                    success: function (json) {
+                        if (json.Error) {
+                            alertafixed({
+                                type: 'danger',
+                                class: 'danger-class',
+                                title: 'ERROR: ' + json.Status,
+                                message: json.Message
+                            })
+
+                        } else {
+                            alertafixed({
+                                type: 'success',
+                                class: 'success-class',
+                                title: 'HECHO: ' + json.Status,
+                                message: json.Message
+                            })
+
+                            let html = `<tr>
+                                            <td nowrap class="d-none"></td>
+                                            <td nowrap>${data.Anio}</td>
+                                            <td nowrap>${data.Cpn}</td>
+                                            <td nowrap>${data.Complicacion}</td>
+                                            <td nowrap>${data.Parto}</td>
+                                            <td nowrap>${data.PesoRn}</td>
+                                            <td nowrap>${data.Puerpio}</td>
+                                        </tr>
+                                        `;
+                            if ($(".error-servidor").length > 0) $(".error-servidor").remove;
+
+                            $(html).appendTo($("#body-embarazos"));
+
+                            $("#modalNuevoEmabarazo").modal("hide");
+                        }
+                        $("#modalNuevoEmabarazo").find(".modal-header").removeClass("loadingGrid");
+                    },
+                    error: function (err, status, message) {
+                        alertafixed({
+                            type: 'danger',
+                            class: 'danger-class',
+                            title: 'ERROR: ' + status,
+                            message: 'Sucedió un error en el servidor: ' + message
+                        })
+                        $("#modalNuevoEmabarazo").find(".modal-header").removeClass("loadingGrid");
+                    }
+                })
+            }
+
+            
+        })
+
+        $("#modalNuevoEmabarazo").on("show.bs.modal", function () {
+            $("#modalGenerales").modal("hide");
+        })
+
+        $("#modalNuevoEmabarazo").on("hidden.bs.modal", function () {
+            $("#modalGenerales").modal("show");
+        })
 
         $("#btn-guardar-antecedentes").on("click", function () {
             let Hijos = [];

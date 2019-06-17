@@ -56,10 +56,12 @@
     <Compile Include="Common\AntecedentesAsistencialBE.cs" />
     <Compile Include="Common\CuidadoPreventivoBE.cs" />
     <Compile Include="Common\CuidadoPreventivoComentarioBE.cs" />
+    <Compile Include="Common\EmbarazoBE.cs" />
     <Compile Include="Common\PlanIntegralBE.cs" />
     <Compile Include="Common\ProblemaBE.cs" />
     <Compile Include="Component\AdditionalExamCustom.cs" />
     <Compile Include="Component\ExamsCustom.cs" />
+    <Compile Include="Embarazo\EmbarazoCustom.cs" />
     <Compile Include="Piso\PisoCustom.cs" />
     <Compile Include="PlanIntegral\PlanIntegralList.cs" />
     <Compile Include="RoleNodeComponentProfile\RoleNodeComponentProfileCustom.cs" />

@@ -147,17 +147,17 @@
                     <div class=" col-12 my-3"></div>
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" id="tab-adulto-tab" data-toggle="tab" href="#tab-adulto" role="tab" aria-controls="tab-adulto" aria-selected="true">Adulto Mayor/Adulto</a>
+                            <a class="nav-link @(ViewBag.Pacient.i_Edad <= 64 && ViewBag.Pacient.i_Edad >=18 ? "active show" : "d-none")" id="tab-adulto-tab" data-toggle="tab" href="#tab-adulto" role="tab" aria-controls="tab-adulto" aria-selected="true">Adulto Mayor/Adulto</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="tab-adolecente-tab" data-toggle="tab" href="#tab-adolecente" role="tab" aria-controls="tab-adolecente" aria-selected="false">Adolecente</a>
+                            <a class="nav-link @(ViewBag.Pacient.i_Edad <= 17 && ViewBag.Pacient.i_Edad >=13 ? "active show" : "d-none")" id="tab-adolecente-tab" data-toggle="tab" href="#tab-adolecente" role="tab" aria-controls="tab-adolecente" aria-selected="false">Adolecente</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" id="tab-ninio-tab" data-toggle="tab" href="#tab-ninio" role="tab" aria-controls="tab-ninio" aria-selected="false">Niño</a>
+                            <a class="nav-link @(ViewBag.Pacient.i_Edad <= 12 ? "active show" : "d-none")" id="tab-ninio-tab" data-toggle="tab" href="#tab-ninio" role="tab" aria-controls="tab-ninio" aria-selected="false">Niño</a>
                         </li>
                     </ul>
                     <div class="tab-content col-12 my-3" id="cont-grupo-etario">
-                        <div class="tab-pane fade show active" id="tab-adulto" role="tabpanel" aria-labelledby="tab-adulto-tab">
+                        <div class="tab-pane fade @(ViewBag.Pacient.i_Edad <= 64 && ViewBag.Pacient.i_Edad >=18 ? "active show" : "d-none")" id="tab-adulto" role="tabpanel" aria-labelledby="tab-adulto-tab">
                             <div class="col-12 my-3">
                                 <div class="group-box">
                                     <label class="label-group-box">Adulto Mayor / Adulto</label>
@@ -224,7 +224,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="tab-adolecente" role="tabpanel" aria-labelledby="tab-adolecente-tab">
+                        <div class="tab-pane fade @(ViewBag.Pacient.i_Edad <= 17 && ViewBag.Pacient.i_Edad >=13 ? "active show" : "d-none")" id="tab-adolecente" role="tabpanel" aria-labelledby="tab-adolecente-tab">
                             <div class="group-box">
                                 <label class="label-group-box">Datos del Cuidador</label>
                                 <div class="row w-100 mx-0">
@@ -291,63 +291,433 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="tab-ninio" role="tabpanel" aria-labelledby="tab-ninio-tab">...</div>
+                        <div class="tab-pane fade @(ViewBag.Pacient.i_Edad <= 12 ? "active show" : "d-none")" id="tab-ninio" role="tabpanel" aria-labelledby="tab-ninio-tab">
+                            <div style="cursor: pointer; border-radius:0.3rem" class="row table-primary justify-content-between align-items-center p-2 my-1" onclick="$('#row-datos-generales').toggleClass('d-none')">
+                                <label class="m-0">DATOS GENERALES FAMILIARES</label>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="row d-none mx-0 w-100" id="row-datos-generales">
+                                <div class="col-12 col-lg-7">
+                                    <label class="small">Madre, Padre o adulto responsable del cuidado del niño(*)</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <label class="small">Edad</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label class="small">DNI</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 pl-4"><label>(*)INFORMACIÓN PARA PROBLEMAS Y ATENCIONES</label></div>
+                                <div class="col-12 col-lg-5">
+                                    <label class="small">Nombre y Apellidos Madre o Tutora</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <label class="small">Edad</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <label class="small">DNI</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <label class="small">Afiliación</label>
+                                    <select class="custom-select custom-select-sm">
+                                        <option value="-1">--Seleccionar--</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <label class="small">Cod. Afiliación</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label class="small">Grado Instrucción</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label class="small"></label>
+                                    <select class="custom-select custom-select-sm">
+                                        <option value="-1">--Seleccionar--</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label class="small">Ocupación</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label class="small">Estado Civil</label>
+                                    <select class="custom-select custom-select-sm">
+                                        <option value="-1">--Seleccionar--</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-lg-5">
+                                    <label class="small">Religión</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-5">
+                                    <label class="small">Nombre y Apellidos Madre o Tutora</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <label class="small">Edad</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <label class="small">DNI</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <label class="small">Afiliación</label>
+                                    <select class="custom-select custom-select-sm">
+                                        <option value="-1">--Seleccionar--</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-lg-2">
+                                    <label class="small">Cod. Afiliación</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label class="small">Grado Instrucción</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label class="small"></label>
+                                    <select class="custom-select custom-select-sm">
+                                        <option value="-1">--Seleccionar--</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label class="small">Ocupación</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label class="small">Estado Civil</label>
+                                    <select class="custom-select custom-select-sm">
+                                        <option value="-1">--Seleccionar--</option>
+                                    </select>
+                                </div>
+                                <div class="col-12 col-lg-5">
+                                    <label class="small">Religión</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                            </div>
+                            <div style="cursor: pointer; border-radius:0.3rem" class="row table-primary justify-content-between align-items-center p-2 my-1" onclick="$('#row-personales-embarazo').toggleClass('d-none')">
+                                <label class="m-0">ANTECEDENTES PERSONALES - EMBARAZO - PARTO</label>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="row w-100 mx-0 d-none" id="row-personales-embarazo">
+                                <div class="col-12">
+                                    <label class="small">Patología(s) durante la gestación</label>
+                                    <textarea class="form-control form-control-sm" rows="2"></textarea>
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label class="small">N° de Embarazo</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label class="small">N° APN</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <label class="small">Lugar de APN</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12">
+                                    <label class="small">Complicaciones del Parto:</label>
+                                    <textarea class="form-control form-control-sm" rows="2"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <label class="small">Especificar por quien fué atendido</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                            </div>
+                            <div style="cursor: pointer; border-radius:0.3rem" class="row table-primary justify-content-between align-items-center p-2 my-1" onclick="$('#row-personales-nacimiento').toggleClass('d-none')">
+                                <label class="m-0">ANTECEDENTES PERSONALES - NACIMIENTO - ALIMENTACIÓN - PATOLOGÍAS</label>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="row w-100 mx-0 d-none" id="row-personales-nacimiento">
+                                <div class="col-12 col-lg-3">
+                                    <label class="small">Edad Gest. al Nacer(sem)</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label class="small">Peso al nacer(gr)</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label class="small">Talla al nacer(cm)</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label class="small">Perímetro Cefálico</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <label class="small">Tiempo de Hospitalización</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12 col-lg-3">
+                                    <label class="small">Perímetro Torácico</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12">
+                                    <label class="small">Especificación de Respiración al Nacer</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12">
+                                    <label class="small">Inicio de alimentacion Complementaria</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12">
+                                    <label class="small">Especificar alergia a medicamentos</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-12">
+                                    <label class="small">Especificar otros antecedentes</label>
+                                    <input type="text" class="form-control form-control-sm" value="" />
+                                </div>
+                            </div>
+                            <div style="cursor: pointer; border-radius:0.3rem" class="row table-primary justify-content-between align-items-center p-2 my-1" onclick="$('#row-familiares').toggleClass('d-none')">
+                                <label class="m-0">ANTECEDENTES FAMILIARES</label>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="row w-100 mx-0 d-none" id="row-familiares">
+                                <div class="col-3">
+                                    <label class="smal">Tuberculosis</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" placeholder="(*)Padre(P), Madre(P), Hno(H), Abuelo/a(A), Otro(O)" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="radio-tbc-si" name="radio-tbc" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-tbc-si">SI</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="radio-tbc-no" name="radio-tbc" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-tbc-no">NO</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <label class="smal">ASMA</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" placeholder="(*)Padre(P), Madre(P), Hno(H), Abuelo/a(A), Otro(O)" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="radio-asma-si" name="radio-asma" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-asma-si">SI</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="radio-asma-no" name="radio-asma" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-asma-no">NO</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <label class="smal">VIH-SIDA</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" placeholder="(*)Padre(P), Madre(P), Hno(H), Abuelo/a(A), Otro(O)" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="radio-sida-si" name="radio-sida" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-sida-si">SI</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="radio-sida-no" name="radio-sida" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-sida-no">NO</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <label class="smal">Diabetes</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" placeholder="(*)Padre(P), Madre(P), Hno(H), Abuelo/a(A), Otro(O)" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="radio-diabetes-si" name="radio-diabetes" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-diabetes-si">SI</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="radio-diabetes-no" name="radio-diabetes" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-diabetes-no">NO</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <label class="smal">Epilepsia</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" placeholder="(*)Padre(P), Madre(P), Hno(H), Abuelo/a(A), Otro(O)" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="radio-epilepsia-si" name="radio-epilepsia" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-epilepsia-si">SI</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="radio-epilepsia-no" name="radio-epilepsia" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-epilepsia-no">NO</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <label class="smal">Alergias a medicinas</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" placeholder="(*)Padre(P), Madre(P), Hno(H), Abuelo/a(A), Otro(O)" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="radio-alergia-si" name="radio-alergia" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-alergia-si">SI</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="radio-alergia-no" name="radio-alergia" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-alergia-no">NO</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <label class="smal">Violencia Familiar</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" placeholder="(*)Padre(P), Madre(P), Hno(H), Abuelo/a(A), Otro(O)" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="radio-violencia-si" name="radio-violencia" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-violencia-si">SI</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="radio-violencia-no" name="radio-violencia" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-violencia-no">NO</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <label class="smal">Alcoholismo</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" placeholder="(*)Padre(P), Madre(P), Hno(H), Abuelo/a(A), Otro(O)" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="radio-alcoholismo-si" name="radio-alcoholismo" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-alcoholismo-si">SI</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="radio-alcoholismo-no" name="radio-alcoholismo" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-alcoholismo-no">NO</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <label class="smal">Drogadicción</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" placeholder="(*)Padre(P), Madre(P), Hno(H), Abuelo/a(A), Otro(O)" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="radio-drogadiccion-si" name="radio-drogadiccion" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-drogadiccion-si">SI</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="radio-drogadiccion-no" name="radio-drogadiccion" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-drogadiccion-no">NO</label>
+                                    </div>
+                                </div>
+                                <div class="col-3">
+                                    <label class="smal">Hepatitis B.</label>
+                                </div>
+                                <div class="col-5">
+                                    <input type="text" placeholder="(*)Padre(P), Madre(P), Hno(H), Abuelo/a(A), Otro(O)" class="form-control form-control-sm" value="" />
+                                </div>
+                                <div class="col-4">
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="radio-hepatitis-si" name="radio-hepatitis" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-hepatitis-si">SI</label>
+                                    </div>
+                                    <div class="custom-control custom-radio custom-control-inline">
+                                        <input type="radio" id="radio-hepatitis-no" name="radio-hepatitis" class="custom-control-input">
+                                        <label class="custom-control-label" for="radio-hepatitis-no">NO</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="cursor: pointer; border-radius:0.3rem" class="row table-primary justify-content-between align-items-center p-2 my-1" onclick="$('#row-vivienda').toggleClass('d-none')">
+                                <label class="m-0">ANTECEDENTES VIVIENDA/SANEAMIENTO BÁSICO</label>
+                                <i class="fas fa-plus"></i>
+                            </div>
+                            <div class="row w-100 mx-0 d-none" id="row-vivienda">
+                                <div class="col-12">
+                                    <label class="small">Especificaciones de Agua Potable</label>
+                                    <textarea class="form-control form-control-sm" rows="2"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <label class="small">Especificaciónes de Desagüe</label>
+                                    <textarea class="form-control form-control-sm" rows="2"></textarea>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     
                     <div class="col-12 solo-femenino my-3 @(ViewBag.Pacient.i_SexTypeId == 1 ? "d-none" : "")">
+
                         <div class="row w-100 mx-0">
-                            <div class="col-12 col-lg-4"><button class="btn btn-sm btn-success">Nuevo</button></div>
-                            <div class="col-12 col-lg-4"><button class="btn btn-sm btn-secondary">Editar</button></div>
-                            <div class="col-12 col-lg-4"><button class="btn btn-sm btn-danger">Eliminar</button></div>
+                            <div class="col-12 col-lg-3">
+                                <label class="small">Embarazo</label>
+                                <input type="text" class="form-control form-control-sm" value="" />
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <label class="small">Nro. Prematuro</label>
+                                <input type="text" class="form-control form-control-sm" value="" />
+                            </div>
+                            <div class="col-12 col-lg-3">
+                                <label class="small">Nro. Aborto</label>
+                                <input type="text" class="form-control form-control-sm" value="" />
+                            </div>
                         </div>
+
                         <div id="" class="overflow-hidden p-1" style="width:100% !important; box-shadow: -5px 5px 8px #bebcbc; border-radius:0.3rem">
                             <div class="box box-info mt-2 mb-0">
                                 <div class="scroll-css" style="overflow:scroll; height: 200px;">
                                     <table class="table table-sm table-hover" id="table-examenes">
                                         <thead>
-                                            <tr class="text-center">
-                                                <th nowrap scope="col" class="d-none">Emabarazo</th>
-                                                <th nowrap scope="col" class="d-none">Año</th>
+                                            <tr>
+                                                <th nowrap scope="col" class="d-none">EmabarazoId</th>
+                                                <th nowrap scope="col">Año</th>
                                                 <th nowrap scope="col">CPN</th>
                                                 <th nowrap scope="col">Complicación</th>
                                                 <th nowrap scope="col">Parto</th>
                                                 <th nowrap scope="col">Peso RN</th>
                                                 <th nowrap scope="col">Puerpio</th>
-                                                <th nowrap scope="col" class="d-none">RecordStatus</th>
-                                                <th nowrap scope="col" class="d-none">RecordType</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="body-update-additional">
+                                        <tbody id="body-embarazos">
                                             @{
 
                                                 if (ViewBag.AntecedentesEmbarazo == null)
                                                 {
-                                                    <tr><td colspan="16" class="text-center">Sin resultados</td></tr>
+                                                    <tr class="error-servidor"><td colspan="16" class="text-center">Sucedió un error en el servidor</td></tr>
                                                 }
                                                 else if (ViewBag.AntecedentesEmbarazo.Count == 0)
                                                 {
-                                                    <tr><td colspan="16" class="text-center">No hay resultados</td></tr>
+                                                    <tr class="error-servidor"><td colspan="16" class="text-center">No hay resultados</td></tr>
                                                 }
                                                 else
                                                 {
                                                     foreach (var item in ViewBag.AntecedentesEmbarazo)
                                                     {
-                                                        <tr class="text-center" onclick="PintarFila(this)">
-                                                            <td nowrap class="d-none">@item.v_AdditionalExamId</td>
-                                                            <td nowrap class="d-none">@item.v_ComponentId</td>
-                                                            <td nowrap>
-                                                                <select disabled class="custom-select custom-select-sm" id="select-component">
-                                                                    @foreach (var comp in ViewBag.Components)
-                                                                    {
-                                                                        <option value="@comp.Value2" @(comp.Value2 == item.v_ComponentId ? "selected" : "")>@comp.Value3</option>
-                                                                    }
-                                                                </select>
-                                                            </td>
-                                                            <td nowrap>@item.v_ServiceId</td>
-                                                            <td nowrap>@item.v_PacientName</td>
-                                                            <td nowrap class="d-none">1</td>
-                                                            <td nowrap class="d-none">2</td>
-                                                        </tr>
+                                                    <tr class="text-center">
+                                                        <td nowrap class="d-none">@item.EmbarazoId</td>
+                                                        <td nowrap>@item.Anio</td>
+                                                        <td nowrap>@item.Cpn</td>
+                                                        <td nowrap>@item.Complicacion</td>
+                                                        <td nowrap>@item.Parto</td>
+                                                        <td nowrap>@item.PesoRn</td>
+                                                        <td nowrap>@item.Puerpio</td>
+                                                    </tr>
                                                     }
                                                 }
                                             }
@@ -357,6 +727,11 @@
                                 </div>
 
                             </div>
+                        </div>
+                        <div class="row w-100 mx-0 justify-content-end">
+                            <button disabled class="btn btn-sm btn-secondary m-2">Editar</button>
+                            <button class="btn btn-sm btn-success m-2" data-toggle="modal" data-target="#modalNuevoEmabarazo">Nuevo</button>
+                            <button disabled class="btn btn-sm btn-danger m-2">Eliminar</button>
                         </div>
                     </div>
                     <div class="col-12 col-lg-6">
@@ -485,6 +860,8 @@
     </div>
 </div>
 
+
+
 <div class="modal fade" id="modalPreventivos" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
@@ -604,14 +981,14 @@
                                         <tbody id="body-cronico">
                                             @if (ViewBag.Problemas == null)
                                             {
-                                                <tr class="text-center">
-                                                    <td nowrap class="d-none">Sucedió un error en el servidor</td>
+                                                <tr>
+                                                    <td nowrap colspan="16" class="text-center">Sucedió un error en el servidor</td>
                                                 </tr>
                                             }
                                             else if (ViewBag.Problemas.Count == 0)
                                             {
-                                                <tr class="text-center">
-                                                    <td nowrap class="d-none">No se encontraron resultados</td>
+                                                <tr>
+                                                    <td nowrap colspan="16" class="text-center">No se encontraron resultados</td>
                                                 </tr>
                                             }
                                             else
@@ -620,7 +997,7 @@
                                                 {
                                                     if (pro.i_Tipo == 1)
                                                     {
-                                                        <tr class="text-center">
+                                                        <tr>
                                                             <td nowrap class="d-none">@pro.v_ProblemaId</td>
                                                             <td nowrap>@pro.d_Fecha.ToShortDateString()</td>
                                                             <td nowrap>@pro.v_Descripcion</td>
@@ -635,9 +1012,9 @@
                                     </table>
                                 </div>
                                 <div class="row w-100 mx-0 justify-content-end p-2">
-                                    <button class="btn btn-sm btn-danger">Eliminar</button>
-                                    <button class="btn btn-sm btn-warning">Editar</button>
-                                    <button class="btn btn-sm btn-success">Agregar</button>
+                                    <button class="btn btn-sm btn-success ml-1" id="nuevo-problema-cronico">Agregar</button>
+                                    <button class="btn btn-sm btn-warning mx-1">Editar</button>
+                                    <button class="btn btn-sm btn-danger mx-1">Eliminar</button>
                                 </div>
                             </div>
                         </div>
@@ -665,14 +1042,14 @@
                                         <tbody id="body-update-additional">
                                             @if (ViewBag.Problemas == null)
                                             {
-                                                <tr class="text-center">
-                                                    <td nowrap class="d-none">Sucedió un error en el servidor</td>
+                                                <tr>
+                                                    <td nowrap colspan="16" class="text-center">Sucedió un error en el servidor</td>
                                                 </tr>
                                             }
                                             else if (ViewBag.Problemas.Count == 0)
                                             {
-                                                <tr class="text-center">
-                                                    <td nowrap class="d-none">No se encontraron resultados</td>
+                                                <tr>
+                                                    <td nowrap colspan="16" class="text-center">No se encontraron resultados</td>
                                                 </tr>
                                             }
                                             else
@@ -681,7 +1058,7 @@
                                                 {
                                                     if (pro.i_Tipo == 2)
                                                     {
-                                                        <tr class="text-center">
+                                                        <tr>
                                                             <td nowrap class="d-none">@pro.v_ProblemaId</td>
                                                             <td nowrap>@pro.d_Fecha</td>
                                                             <td nowrap>@pro.v_Descripcion</td>
@@ -694,9 +1071,9 @@
                                     </table>
                                 </div>
                                 <div class="row w-100 mx-0 justify-content-end p-2">
-                                    <button class="btn btn-sm btn-danger">Eliminar</button>
-                                    <button class="btn btn-sm btn-warning">Editar</button>
-                                    <button class="btn btn-sm btn-success">Agregar</button>
+                                    <button class="btn btn-sm btn-success ml-1" id="nuevo-problema-agudo">Agregar</button>
+                                    <button class="btn btn-sm btn-warning mx-1">Editar</button>
+                                    <button class="btn btn-sm btn-danger mx-1">Eliminar</button>
                                 </div>
                             </div>
                         </div>
@@ -725,11 +1102,11 @@
                                         <tbody id="body-update-additional">
                                             @if (ViewBag.PlanIntegral == null)
                                             {
-                                                <tr class="text-center"><td nowrap colspan="5">Sucedió un error en el servidor</td></tr>
+                                                <tr><td nowrap colspan="5" class="text-center">Sucedió un error en el servidor</td></tr>
                                             }
                                             else if (ViewBag.PlanIntegral.Count == 0)
                                             {
-                                                <tr class="text-center"><td nowrap colspan="5">No se Encontraron resultados</td></tr>
+                                                <tr><td nowrap colspan="5" class="text-center">No se encontraron resultados</td></tr>
                                             }
                                             else
                                             {
@@ -748,7 +1125,11 @@
                                         </tbody>
                                     </table>
                                 </div>
-
+                                <div class="row w-100 mx-0 justify-content-end p-2">
+                                    <button class="btn btn-sm btn-success ml-1" id="nuevo-plan-integral">Agregar</button>
+                                    <button class="btn btn-sm btn-warning mx-1">Editar</button>
+                                    <button class="btn btn-sm btn-danger mx-1">Eliminar</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -762,3 +1143,87 @@
     </div>
 </div>
 
+
+<div class="modal fade" id="modalNuevoEmabarazo" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Detalle del Embarazo</h5>
+            </div>
+            <div class="modal-body">
+                <div class="row w-100 mx-0 mt-3 justify-content-between">
+                    <div class="col-12">
+                        <label class="small">Año</label>
+                        <input type="text" class="form-control form-control-sm" id="embarazo-anio" value="" />
+                    </div>
+                    <div class="col-12">
+                        <label class="small">CPN</label>
+                        <input type="text" class="form-control form-control-sm" id="embarazo-cpn" value="" />
+                    </div>
+                    <div class="col-12">
+                        <label class="small">Complicación</label>
+                        <input type="text" class="form-control form-control-sm" id="embarazo-complicacion" value="" />
+                    </div>
+                    <div class="col-12">
+                        <label class="small">Parto</label>
+                        <input type="text" class="form-control form-control-sm" id="embarazo-parto" value="" />
+                    </div>
+                    <div class="col-12">
+                        <label class="small">Peso RN</label>
+                        <input type="text" class="form-control form-control-sm" id="embarazo-peso" value="" />
+                    </div>
+                    <div class="col-12">
+                        <label class="small">Puerperio</label>
+                        <input type="text" class="form-control form-control-sm" id="embarazo-puerperio" value="" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer row w-100 mx-0 justify-content-between p-2">
+                <button class="btn btn-sm btn-secondary" data-dismiss="modal">Salir</button>
+                <button class="btn btn-sm btn-primary" id="guardar-embarazo">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalProblemaPlan" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="tipo-popup"></h5>
+            </div>
+            <div class="modal-body">
+                <div class="row w-100 mx-0 mt-3 justify-content-between">
+                    <div class="col-12">
+                        <label class="small">Tipo</label>
+                        <input type="text" class="form-control form-control-sm" id="prob-tipo" value="" />
+                    </div>
+                    <div class="col-12">
+                        <label class="small">Fecha</label>
+                        <input type="date" class="form-control form-control-sm" id="prob-fecha" value="" />
+                    </div>
+                    <div class="col-12">
+                        <label class="small">Problema</label>
+                        <input type="text" class="form-control form-control-sm" id="prob-problema" value="" />
+                    </div>
+                    <div class="col-12">
+                        <label class="small">¿Es controlado?</label>
+                        <input type="text" class="form-control form-control-sm" id="prob-controlado" value="" />
+                    </div>
+                    <div class="col-12">
+                        <label class="small">Observaciones</label>
+                        <input type="text" class="form-control form-control-sm" id="prob-observacion" value="" />
+                    </div>
+                    <div class="col-12">
+                        <label class="small">Lugar</label>
+                        <input type="text" class="form-control form-control-sm" id="prob-lugar" value="" />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer row w-100 mx-0 justify-content-between p-2">
+                <button class="btn btn-sm btn-secondary" data-dismiss="modal">Salir</button>
+                <button class="btn btn-sm btn-primary" id="guardar-problema">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>

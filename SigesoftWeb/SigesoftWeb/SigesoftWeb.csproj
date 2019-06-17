@@ -279,6 +279,7 @@
     <Compile Include="Models\Component\ExamsCustom.cs" />
     <Compile Include="Models\ConfigDx\ConfigDxCustom.cs" />
     <Compile Include="Models\Diagnostic\DiagnosticCustom.cs" />
+    <Compile Include="Models\Embarazo\EmbarazoCustom.cs" />
     <Compile Include="Models\Eso\EsoCustom.cs" />
     <Compile Include="Models\Eso\RecipesCustom.cs" />
     <Compile Include="Models\Eso\ValorCampo.cs" />
