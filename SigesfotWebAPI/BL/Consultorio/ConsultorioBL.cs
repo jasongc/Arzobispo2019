@@ -5,6 +5,7 @@ using BE.Message;
 using BE.Sigesoft;
 using BL.Common;
 using BL.Service;
+using DAL;
 using DAL.Service;
 using NetPdf;
 using System;
@@ -280,7 +281,7 @@ namespace BL.Consultorio
             
         }
 
-        public bool LiberarPaciente(int Category, string ServiceId, string CategoryName)
+        public bool LiberarPaciente(int Category, string ServiceId, string CategoryName, string CalendarId)
         {
             var serviceComponent = new ServiceDal().GetServiceComponentByCategoryId(Category, ServiceId);
             int statusAntiguo = serviceComponent[0].i_ServiceComponentStatusId.Value;
@@ -290,6 +291,11 @@ namespace BL.Consultorio
                 _ServiceComponentId.Add(item.v_ServiceComponentId);
             }
 
+            DatabaseContext ctx = new DatabaseContext();
+
+            //var objCalendar = ctx.Calendar.Where(x => x.v_CalendarId == CalendarId).FirstOrDefault();
+            //objCalendar.i_LineStatusId = 2;
+            //ctx.SaveChanges();
             if (CategoryName == "LABORATORIO")
             {
                 return new ServiceDal().LiberarPacientelaboratorio(_ServiceComponentId, statusAntiguo);
@@ -298,6 +304,9 @@ namespace BL.Consultorio
             {
                 return new ServiceDal().LiberarPaciente(_ServiceComponentId);
             }
+
+
+            
         }
 
         public MessageCustom ReImprimirAdicional(int userId, string serviceId)

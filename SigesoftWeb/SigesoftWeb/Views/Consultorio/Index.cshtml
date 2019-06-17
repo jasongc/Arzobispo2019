@@ -339,6 +339,7 @@
 
             let Category = $("#select-exam").val();
             let ServiceId = $("#body-calling-paciente tr").eq(0).find("td").eq(0).text();
+            let CalendarId = $("#body-calling-paciente tr").eq(0).find("td").eq(3).text();
             let CategoryName = $("#select-exam option[value='" + $("#select-exam").val() + "']").text();
 
 
@@ -350,6 +351,7 @@
                     Category,
                     ServiceId,
                     CategoryName,
+                    CalendarId
                 },
                 url: '/Consultorio/LiberarPaciente',
                 success: function (json) {
@@ -916,6 +918,7 @@
             Piso,
             ServiceStatusId,
             Oficina,
+            CalendarId,
         }
 
         $.ajax({
@@ -954,6 +957,7 @@
                                     <td nowrap>${ServiceId}</td>
                                     <td nowrap class="d-none">${PacientId}</td>
                                     <td nowrap>${Paciente}</td>
+                                    <td nowrap class="d-none">${CalendarId}</td>
                                 </tr>
                                 `;
 

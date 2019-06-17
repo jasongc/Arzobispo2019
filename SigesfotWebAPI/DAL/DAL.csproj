@@ -70,6 +70,7 @@
     <Compile Include="Calendar\X_MenosUno.cs" />
     <Compile Include="Calendar\X_noesIgualque_A.cs" />
     <Compile Include="Consultorio\ConsultorioDal.cs" />
+    <Compile Include="Embarazo\EmbarazoDal.cs" />
     <Compile Include="PlanIntegral\PlanIntegralDal.cs" />
     <Compile Include="RUC\RucDataDal.cs" />
     <Compile Include="z-ClientesSAMBHS\ClientesDal.cs" />

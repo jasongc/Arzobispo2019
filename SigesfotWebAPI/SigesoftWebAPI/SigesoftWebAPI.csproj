@@ -200,6 +200,7 @@
     <Compile Include="Controllers\Consultorio\ConsultorioController.cs" />
     <Compile Include="Controllers\Diagnostic\DiagnosticController.cs" />
     <Compile Include="Controllers\Documento\DocumentoController.cs" />
+    <Compile Include="Controllers\Embarazo\EmbarazoController.cs" />
     <Compile Include="Controllers\MedicalAssistance\PatientsAssistanceController.cs" />
     <Compile Include="Controllers\Node\NodeController.cs" />
     <Compile Include="Controllers\Notification\NotificationController.cs" />

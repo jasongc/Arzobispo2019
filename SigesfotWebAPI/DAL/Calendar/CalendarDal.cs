@@ -247,6 +247,7 @@ namespace DAL.Calendar
                                 v_ProtocolId = J.v_ProtocolId,
                                 i_ServiceId = A.i_ServiceId.Value,
                                 v_ComponentId = D.v_ComponentId,
+                                i_QueueStatusId = D.i_QueueStatusId.Value,
                                 Piso = P.v_Value2
                             }).ToList();
                 var queryFinal = query.Where(x => x.d_DateTimeCalendar.Value.Date == CurrentDate.Date)
@@ -510,7 +511,7 @@ namespace DAL.Calendar
             }
         }
 
-
+        
 
         public string GetMedicalExam(string componentId)
         {

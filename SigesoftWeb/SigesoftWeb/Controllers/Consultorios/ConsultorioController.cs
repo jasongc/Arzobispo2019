@@ -133,7 +133,7 @@ namespace SigesoftWeb.Controllers.Consultorios
         }
 
         [GeneralSecurity(Rol = "Consultorio-LiberarPaciente")]
-        public JsonResult LiberarPaciente(string Category, string ServiceId, string CategoryName)
+        public JsonResult LiberarPaciente(string Category, string ServiceId, string CategoryName, string CalendarId)
         {
 
             Api API = new Api();
@@ -142,6 +142,7 @@ namespace SigesoftWeb.Controllers.Consultorios
                 { "Int1", Category },
                 { "String1", ServiceId },
                 { "String2", CategoryName },
+                { "String3", CalendarId },
             };
             var result = API.Post<MessageCustom>("Consultorio/LiberarPaciente", arg);
             return new JsonResult { Data = result, JsonRequestBehavior = JsonRequestBehavior.AllowGet };

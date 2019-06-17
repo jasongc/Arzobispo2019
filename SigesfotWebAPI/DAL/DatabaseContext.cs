@@ -129,7 +129,7 @@ namespace DAL
         public DbSet<CuidadoPreventivoComentarioBE> CuidadoPreventivoComentario { get; set; }
         public DbSet<PlanIntegralBE> PlanIntegral { get; set; }
         public DbSet<ProblemaBE> Problema { get; set; }
-
+        public DbSet<EmbarazoBE> Embarazo { get; set; }
 
         //----------------Dtos TEST---------------------
         public DbSet<TestConcurrenceDto> TestConcurrenc { get; set; }

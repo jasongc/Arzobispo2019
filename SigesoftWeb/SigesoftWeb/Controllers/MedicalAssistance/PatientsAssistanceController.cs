@@ -28,6 +28,8 @@ using static SigesoftWeb.Models.Eso.RecipesCustom;
 using SigesoftWeb.Models.Antecedentes;
 using SigesoftWeb.Models.Pacient;
 using SigesoftWeb.Models.PlanIntegral;
+using SigesoftWeb.Models.Message;
+using SigesoftWeb.Models.Embarazo;
 
 namespace SigesoftWeb.Controllers.MedicalAssistance
 {
@@ -120,6 +122,7 @@ namespace SigesoftWeb.Controllers.MedicalAssistance
 
             ViewBag.ServiceId = serviceId;
             ViewBag.PersonId = id;
+            ViewBag.AntecedentesEmbarazo = API.Get<List<EmbarazoCustom>>("Embarazo/GetEmbarazo?personId=" + id);
             ViewBag.AtencedentesEso = API.Get<BoardEsoAntecedentes>("Antecedentes/ObtenerEsoAntecedentesPorGrupoId?PersonId=" + id);
             ViewBag.EstateEso = API.Get<List<Dropdownlist>>("SystemParameter/GetParametroByGrupoId", arg4);
             ViewBag.EstadoCivil = API.Get<List<Dropdownlist>>("SystemParameter/GetParametroByGrupoId?grupoId=101");
@@ -691,6 +694,23 @@ namespace SigesoftWeb.Controllers.MedicalAssistance
             };
 
             var result = API.Post<string>("Eso/GeneratePrintRecipes", arg);
+
+            return new JsonResult { Data = result, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+        }
+
+        [GeneralSecurity(Rol = "MedicalConsultation-AddEmbarazo")]
+        public JsonResult AddEmbarazo(EmbarazoCustom data)
+        {
+            
+            Api API = new Api();
+            Dictionary<string, string> arg = new Dictionary<string, string>()
+            {
+                { "String1" , JsonConvert.SerializeObject(data) },
+                { "Int1" , ViewBag.USER.NodeId.ToString() },
+                { "Int2" , ViewBag.USER.SystemUserId.ToString() },
+            };
+
+            var result = API.Post<MessageCustom>("Embarazo/AddEmbarazo", arg);
 
             return new JsonResult { Data = result, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
